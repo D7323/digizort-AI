@@ -1,2 +1,132 @@
-<!DOCTYPE html><html><body><h1>Digizort AI</h1></body></html>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DIGIZORT | ZORT.AI Assistant</title>
+  <style>
+    body {
+      background-color: #0f0f0f;
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    header {
+      background-color: #111;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #00ffff;
+      border-bottom: 2px solid #0ff;
+    }
+    .chatbox {
+      flex: 1;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+    .message {
+      margin: 0.5rem 0;
+      padding: 0.7rem 1rem;
+      border-radius: 1rem;
+      max-width: 80%;
+    }
+    .user {
+      align-self: flex-end;
+      background-color: #222;
+    }
+    .bot {
+      align-self: flex-start;
+      background-color: #0077ff;
+      color: white;
+    }
+    .input-area {
+      display: flex;
+      padding: 1rem;
+      background-color: #111;
+      border-top: 2px solid #0ff;
+    }
+    input {
+      flex: 1;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 0.5rem;
+    }
+    button {
+      margin-left: 0.5rem;
+      background-color: #0ff;
+      border: none;
+      border-radius: 0.5rem;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>DIGIZORT // ZORT.AI Assistant 🤖</header>
+  <div class="chatbox" id="chatbox">
+    <div class="message bot">👋 Hello! I’m <strong>ZORT.AI</strong>, your creative assistant from <strong>DIGIZORT</strong>. We offer:<br>
+      🖼 Photo Editing<br>
+      🎬 Video Editing<br>
+      🎨 Logo & Poster Design<br>
+      📢 Notice & Card Design<br>
+      <br>How can I help you today?
+    </div>
+  </div>
+  <div class="input-area">
+    <input type="text" id="userInput" placeholder="Type your message here..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const message = input.value.trim();
+      if (message === "") return;
+
+      appendMessage(message, "user");
+      input.value = "";
+      setTimeout(() => replyFromBot(message), 500);
+    }
+
+    function appendMessage(text, sender) {
+      const msg = document.createElement("div");
+      msg.className = `message ${sender}`;
+      msg.textContent = text;
+      document.getElementById("chatbox").appendChild(msg);
+      msg.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function replyFromBot(userMsg) {
+      let response = "🤖 I'm not sure how to respond to that yet.";
+
+      const msg = userMsg.toLowerCase();
+      if (msg.includes("poster")) {
+        response = "Awesome! 🚀 What size is your poster (A4, Insta post)? And what's the content or style you want?";
+      } else if (msg.includes("contact") || msg.includes("whatsapp")) {
+        response = "📱 Contact DIGIZORT on WhatsApp: 8129043397 or Email: digizort@gmail.com.";
+      } else if (msg.includes("logo") || msg.includes("design")) {
+        response = "🎨 Cool! We can make logos, posters, cards & more. Tell me what you need!";
+      } else if (msg.includes("services") || msg.includes("what can you do")) {
+        response = "Here’s what DIGIZORT offers:
+🖼 Photo Editing
+🎬 Video Editing
+🎨 Logo & Poster Design
+📢 Notice & Card Design
+Let me know what you need!";
+      }
+
+      appendMessage(response, "bot");
+    }
+  </script>
+</body>
+</html>
